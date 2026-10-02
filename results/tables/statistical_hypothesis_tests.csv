@@ -1,0 +1,7 @@
+Rank,Hypothesis Comparison,Raw p-value,Holm Adjusted p-value,Significance Threshold,Reject H0
+1,LAC-SSM vs BiLSTM Attention,1.0000e-04,6.0000e-04,0.00833,True
+2,LAC-SSM vs CNN-LSTM Hybrid,1.0000e-04,5.0000e-04,0.01000,True
+3,LAC-SSM vs 1D Transformer,1.0000e-04,4.0000e-04,0.01250,True
+4,LAC-SSM vs Random Forest,2.0000e-04,6.0000e-04,0.01667,True
+5,LAC-SSM vs XGBoost,5.0000e-04,1.0000e-03,0.02500,True
+6,LAC-SSM vs ResNet-1D (AUROC Bootstrap),1.0000e-03,1.0000e-03,0.05000,True

@@ -1,0 +1,2 @@
+Comparison,b (LAC+ / ResNet-),c (LAC- / ResNet+),Chi-Square Statistic,Degrees of Freedom,p-value,Significant (alpha=0.05)
+LAC-SSM vs ResNet-1D,479,582,9.8058,1,1.7396e-03,True

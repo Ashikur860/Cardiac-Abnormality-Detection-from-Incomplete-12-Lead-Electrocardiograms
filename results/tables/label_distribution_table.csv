@@ -1,0 +1,10 @@
+Abbreviation,Condition Name,Category,SNOMED-CT Code,Positive Samples,Negative Samples,Prevalence (%),Imbalance Ratio (Neg:Pos)
+SR,Sinus Rhythm (Normal),Rhythm,426783006,18092,3745,82.85,0.2:1
+AF,Atrial Fibrillation,Arrhythmia,427393009,772,21065,3.54,27.3:1
+IAVB,1st Degree AV Block,Conduction Delay,270492004,797,21040,3.65,26.4:1
+LBBB,Left Bundle Branch Block,Conduction Delay,164873001,2359,19478,10.8,8.3:1
+RBBB,Right Bundle Branch Block,Conduction Delay,164861001,2175,19662,9.96,9.0:1
+PAC,Premature Atrial Contraction,Ectopic Beat,164889003,1514,20323,6.93,13.4:1
+PVC,Premature Ventricular Contraction,Ectopic Beat,164884008,1154,20683,5.28,17.9:1
+STD,ST-Segment Depression,Myocardial Ischemia,445118002,1626,20211,7.45,12.4:1
+STE,ST-Segment Elevation,Acute Ischemia/Infarction,55930002,770,21067,3.53,27.4:1

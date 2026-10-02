@@ -1,0 +1,82 @@
+Model,Class,Accuracy (%),F1-Score,AUROC
+Logistic Regression,SR,84.76,0.9078,0.7897
+Logistic Regression,AF,93.52,0.0,0.7998
+Logistic Regression,IAVB,91.62,0.12,0.7494
+Logistic Regression,LBBB,88.76,0.7035,0.9126
+Logistic Regression,RBBB,81.33,0.5377,0.8477
+Logistic Regression,PAC,94.48,0.7717,0.972
+Logistic Regression,PVC,95.43,0.8125,0.9688
+Logistic Regression,STD,93.33,0.8223,0.9751
+Logistic Regression,STE,91.43,0.0426,0.7609
+Random Forest,SR,85.71,0.9133,0.8671
+Random Forest,AF,93.9,0.0,0.7456
+Random Forest,IAVB,91.81,0.1224,0.7465
+Random Forest,LBBB,88.95,0.6506,0.9374
+Random Forest,RBBB,85.71,0.6305,0.8929
+Random Forest,PAC,92.57,0.7347,0.9488
+Random Forest,PVC,94.86,0.7523,0.9612
+Random Forest,STD,94.1,0.8442,0.9838
+Random Forest,STE,91.81,0.0,0.7397
+Extra Trees,SR,84.19,0.9054,0.857
+Extra Trees,AF,93.52,0.1053,0.7291
+Extra Trees,IAVB,92.0,0.0455,0.7522
+Extra Trees,LBBB,88.38,0.7024,0.9377
+Extra Trees,RBBB,84.0,0.625,0.884
+Extra Trees,PAC,93.14,0.7568,0.9508
+Extra Trees,PVC,95.81,0.7925,0.9635
+Extra Trees,STD,94.67,0.8571,0.983
+Extra Trees,STE,91.24,0.0,0.7429
+LightGBM,SR,84.19,0.9018,0.8706
+LightGBM,AF,91.81,0.0444,0.7668
+LightGBM,IAVB,91.43,0.0426,0.7098
+LightGBM,LBBB,89.14,0.6919,0.9345
+LightGBM,RBBB,85.71,0.6696,0.908
+LightGBM,PAC,94.48,0.7642,0.9734
+LightGBM,PVC,96.0,0.8073,0.9655
+LightGBM,STD,94.86,0.8615,0.9878
+LightGBM,STE,91.62,0.0,0.7263
+XGBoost,SR,84.57,0.9055,0.8687
+XGBoost,AF,93.33,0.1026,0.7868
+XGBoost,IAVB,91.43,0.0,0.7156
+XGBoost,LBBB,89.33,0.6543,0.9379
+XGBoost,RBBB,86.29,0.6897,0.9072
+XGBoost,PAC,93.9,0.7746,0.968
+XGBoost,PVC,95.81,0.8036,0.9655
+XGBoost,STD,94.86,0.8683,0.9872
+XGBoost,STE,92.0,0.0455,0.7448
+Calibrated SVM,SR,78.1,0.8619,0.74
+Calibrated SVM,AF,93.33,0.0,0.7224
+Calibrated SVM,IAVB,91.81,0.0444,0.6627
+Calibrated SVM,LBBB,90.48,0.7573,0.9102
+Calibrated SVM,RBBB,80.95,0.1379,0.6833
+Calibrated SVM,PAC,94.67,0.7778,0.9677
+Calibrated SVM,PVC,96.19,0.8305,0.9697
+Calibrated SVM,STD,92.95,0.8063,0.9742
+Calibrated SVM,STE,91.81,0.0,0.6085
+K-Nearest Neighbors,SR,79.24,0.8725,0.7601
+K-Nearest Neighbors,AF,93.14,0.0,0.6124
+K-Nearest Neighbors,IAVB,92.0,0.16,0.6898
+K-Nearest Neighbors,LBBB,87.05,0.5854,0.9005
+K-Nearest Neighbors,RBBB,84.19,0.5311,0.8618
+K-Nearest Neighbors,PAC,89.14,0.4,0.8656
+K-Nearest Neighbors,PVC,96.19,0.8214,0.9525
+K-Nearest Neighbors,STD,93.52,0.83,0.9639
+K-Nearest Neighbors,STE,91.62,0.0,0.6642
+Multi-Layer Perceptron,SR,84.95,0.9063,0.8522
+Multi-Layer Perceptron,AF,94.1,0.0606,0.6703
+Multi-Layer Perceptron,IAVB,92.19,0.1961,0.7582
+Multi-Layer Perceptron,LBBB,88.19,0.6869,0.917
+Multi-Layer Perceptron,RBBB,85.9,0.6105,0.902
+Multi-Layer Perceptron,PAC,94.1,0.7395,0.9746
+Multi-Layer Perceptron,PVC,95.05,0.7797,0.9778
+Multi-Layer Perceptron,STD,93.71,0.8325,0.9804
+Multi-Layer Perceptron,STE,91.81,0.0,0.6739
+Stacking Ensemble,SR,85.71,0.9108,0.8746
+Stacking Ensemble,AF,92.95,0.1395,0.7627
+Stacking Ensemble,IAVB,91.81,0.1887,0.74
+Stacking Ensemble,LBBB,90.1,0.6941,0.9422
+Stacking Ensemble,RBBB,87.62,0.6766,0.9161
+Stacking Ensemble,PAC,94.48,0.7943,0.9661
+Stacking Ensemble,PVC,95.62,0.8,0.9624
+Stacking Ensemble,STD,94.86,0.8601,0.9874
+Stacking Ensemble,STE,91.62,0.0,0.761

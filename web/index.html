@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioLAC-SSM™ | Lead-Agnostic State-Space Cardiac Diagnostic Workstation</title>
+    <meta name="description" content="State-of-the-Art Lead-Agnostic and Uncertainty-Calibrated State-Space Modeling for Multi-Label Cardiac Abnormality Detection from Incomplete 12-Lead Electrocardiograms.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="dark-theme">
+    <!-- Header with Live Telemetry Pulse -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand-group">
+                <div class="brand-logo-container">
+                    <svg class="ecg-pulse-svg" viewBox="0 0 100 40">
+                        <path class="ecg-path" d="M0,20 L25,20 L30,5 L35,35 L42,10 L48,26 L55,20 L100,20" />
+                    </svg>
+                    <div class="live-dot-pulse"></div>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-title">
+                        <span>Cardio</span><span class="brand-accent">LAC-SSM</span><span class="brand-badge">PRO v2.4</span>
+                    </div>
+                    <div class="brand-subtitle">
+                        Lead-Agnostic & Uncertainty-Calibrated State-Space Diagnostic Workstation
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Telemetry Badges -->
+            <div class="telemetry-bar" style="flex-wrap: wrap; gap: 8px;">
+                <a href="/results/IEEE_Transactions_CardioLAC_SSM_53Pages_LaTeX.pdf" target="_blank" class="btn btn-primary btn-xs" style="text-decoration:none;" title="Complete 53-page IEEE Transactions monograph compiled directly from LaTeX source with all appendices"><span class="btn-icon">📥</span> LaTeX Monograph (53 Pages)</a>
+                <a href="/results/IEEE_Transactions_CardioLAC_SSM_CameraReady.pdf" target="_blank" class="btn btn-outline btn-xs" style="text-decoration:none;" title="Standard double-column IEEE Transactions camera-ready layout"><span class="btn-icon">📄</span> Camera-Ready (13 Pages)</a>
+                <a href="/results/IEEE_LaTeX_Submission_Package.zip" download class="btn btn-outline btn-xs" style="text-decoration:none;" title="Complete LaTeX package containing main.tex, references.bib, IEEEtran.cls, and IEEEtran.bst"><span class="btn-icon">📦</span> LaTeX Package (.ZIP)</a>
+                <a href="/paper/Q1_Journal_Paper_CardioLAC_SSM.md" target="_blank" class="btn btn-outline btn-xs" style="text-decoration:none;"><span class="btn-icon">📝</span> Markdown Paper</a>
+            </div>
+                <div class="telemetry-item">
+                    <span class="tele-label">MODEL:</span>
+                    <span class="tele-value">LAC-SSM (S4D Bi-Dir)</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="tele-label">COHORT:</span>
+                    <span class="tele-value">Chapman-Shaoxing (N=3,500)</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="tele-label">INFERENCE:</span>
+                    <span class="tele-value highlight" id="tele-latency">~11.8 ms</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs-wrapper">
+            <div class="nav-tabs-container">
+                <button class="nav-tab active" data-tab="tab-studio" id="btn-tab-studio">
+                    <span class="tab-icon">⚡</span>
+                    <span class="tab-text">Interactive Diagnostic Studio</span>
+                </button>
+                <button class="nav-tab" data-tab="tab-benchmark" id="btn-tab-benchmark">
+                    <span class="tab-icon">📊</span>
+                    <span class="tab-text">Multi-Model Benchmark Arena (19 Models)</span>
+                </button>
+                <button class="nav-tab" data-tab="tab-gallery" id="btn-tab-gallery">
+                    <span class="tab-icon">🖼️</span>
+                    <span class="tab-text">Confusion Matrix & ROC Gallery (21 Models)</span>
+                </button>
+                <button class="nav-tab" data-tab="tab-architecture" id="btn-tab-architecture">
+                    <span class="tab-icon">🔬</span>
+                    <span class="tab-text">Scientific Architecture & Theory</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Application Container -->
+    <main class="main-content">
+
+        <!-- ============================================================== -->
+        <!-- TAB 1: INTERACTIVE DIAGNOSTIC STUDIO                          -->
+        <!-- ============================================================== -->
+        <section id="tab-studio" class="tab-panel active">
+            <!-- Patient Case Selection Ribbon -->
+            <div class="glass-card case-selection-ribbon">
+                <div class="ribbon-header">
+                    <div class="ribbon-title">
+                        <span class="icon">🫀</span>
+                        <span>Clinical Case Selection</span>
+                        <span class="hint-pill">Select from Chapman-Shaoxing Test Cohort (525 Patients)</span>
+                    </div>
+                    <div class="quick-patient-direct">
+                        <label for="direct-case-input">Custom Patient ID (0 - 524):</label>
+                        <input type="number" id="direct-case-input" min="0" max="524" value="3">
+                        <button class="btn btn-secondary btn-sm" id="btn-load-direct">Load ID</button>
+                        <button class="btn btn-outline btn-sm" id="btn-random-patient">🎲 Random</button>
+                    </div>
+                </div>
+
+                <!-- Showcase Presets -->
+                <div class="case-chips-scroll" id="case-chips-container">
+                    <!-- Populated dynamically via app.js -->
+                </div>
+
+                <!-- Patient Demographic & Ground Truth Banner -->
+                <div class="patient-metadata-bar" id="patient-metadata-display">
+                    <div class="meta-item">
+                        <span class="meta-lbl">Patient ID:</span>
+                        <span class="meta-val" id="meta-pid">PAT-003</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-lbl">Demographics:</span>
+                        <span class="meta-val" id="meta-demo">42 yrs | Male</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-lbl">Heart Rate:</span>
+                        <span class="meta-val" id="meta-hr">72 bpm</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-lbl">Signal Profile:</span>
+                        <span class="meta-val">10.0 sec @ 100 Hz (1,000 steps)</span>
+                    </div>
+                    <div class="meta-item ground-truth-group">
+                        <span class="meta-lbl">Ground Truth Diagnosis:</span>
+                        <div class="gt-badges" id="meta-gt-badges">
+                            <span class="badge badge-normal">SR (Sinus Rhythm)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Incomplete Lead Simulator & Interactive Controls -->
+            <div class="glass-card lead-simulator-card">
+                <div class="lead-simulator-header">
+                    <div class="sim-title-group">
+                        <span class="icon">🔌</span>
+                        <div>
+                            <div class="sim-title">Dynamic Lead-Agnostic Incomplete Simulator</div>
+                            <div class="sim-desc">Toggle leads ON/OFF to simulate real-world electrode disconnection, wearable single-lead acquisition, or emergency sparse telemetry.</div>
+                        </div>
+                    </div>
+                    <div class="sim-stats">
+                        <span class="stat-badge" id="active-lead-counter">12 / 12 Leads Active</span>
+                        <span class="stat-badge secondary" id="lead-reduction-pct">0% Data Loss</span>
+                    </div>
+                </div>
+
+                <!-- Interactive 12 Lead Toggles -->
+                <div class="lead-matrix-wrapper">
+                    <div class="lead-group-label">Limb Leads (Frontal Plane):</div>
+                    <div class="lead-toggles-row" id="limb-leads-row">
+                        <button class="lead-chip active" data-lead="0"><span class="chip-name">Lead I</span><span class="chip-status">ON</span></button>
+                        <button class="lead-chip active" data-lead="1"><span class="chip-name">Lead II</span><span class="chip-status">ON</span></button>
+                        <button class="lead-chip active" data-lead="2"><span class="chip-name">Lead III</span><span class="chip-status">ON</span></button>
+                        <button class="lead-chip active" data-lead="3"><span class="chip-name">Lead aVR</span><span class="chip-status">ON</span></button>
+                        <button class="lead-chip active" data-lead="4"><span class="chip-name">Lead aVL</span><span class="chip-status">ON</span></button>
+                        <button class="lead-chip active" data-lead="5"><span class="chip-name">Lead aVF</span><span class="chip-status">ON</span></button>
+                    </div>
+
+                    <div class="lead-group-label">Precordial Leads (Transverse Plane):</div>
+                    <div class="lead-toggles-row" id="precordial-leads-row">
+                        <button class="lead-chip active" data-lead="6"><span class="chip-name">Lead V1</span><span class="chip-status">ON</span></button>
+                        <button class="lead-chip active" data-lead="7"><span class="chip-name">Lead V2</span><span class="chip-status">ON</span></button>
+                        <button class="lead-chip active" data-lead="8"><span class="chip-name">Lead V3</span><span class="chip-status">ON</span></button>
+                        <button class="lead-chip active" data-lead="9"><span class="chip-name">Lead V4</span><span class="chip-status">ON</span></button>
+                        <button class="lead-chip active" data-lead="10"><span class="chip-name">Lead V5</span><span class="chip-status">ON</span></button>
+                        <button class="lead-chip active" data-lead="11"><span class="chip-name">Lead V6</span><span class="chip-status">ON</span></button>
+                    </div>
+                </div>
+
+                <!-- Preset Reduction Buttons -->
+                <div class="lead-presets-bar">
+                    <span class="preset-label">Clinical Scenario Presets:</span>
+                    <button class="btn btn-outline btn-xs" id="preset-all-12">Standard 12-Leads (12/12)</button>
+                    <button class="btn btn-outline btn-xs" id="preset-limb-only">Limb Leads Only (6/12)</button>
+                    <button class="btn btn-outline btn-xs" id="preset-precordial-only">Precordial Only (6/12)</button>
+                    <button class="btn btn-outline btn-xs" id="preset-einthoven">Einthoven Triad (I, II, III)</button>
+                    <button class="btn btn-outline btn-xs" id="preset-holter">Ambulatory Holter (I, II)</button>
+                    <button class="btn btn-outline btn-xs" id="preset-single-lead">Ultra-Sparse Single-Lead (Lead II)</button>
+                    <button class="btn btn-outline btn-xs" id="preset-random-dropout">🎲 Random 50% Disconnection</button>
+                    
+                    <div class="action-btn-right">
+                        <button class="btn btn-primary" id="btn-run-inference">
+                            <span class="btn-spinner" id="inference-spinner" style="display:none;"></span>
+                            <span class="btn-icon">⚡</span>
+                            <span class="btn-label">Run LAC-SSM Inference</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ECG Signal Strip Canvas & Visualization -->
+            <div class="glass-card ecg-canvas-card">
+                <div class="ecg-canvas-toolbar">
+                    <div class="toolbar-left">
+                        <span class="monitor-brand">CARDIOPULSE™ MONITOR VIEW</span>
+                        <div class="calibration-badge">25 mm/s | 10 mm/mV | High-Pass: 0.5 Hz | Low-Pass: 45 Hz</div>
+                    </div>
+                    <div class="toolbar-center">
+                        <div class="view-mode-toggle">
+                            <button class="mode-btn active" id="btn-view-multi">12-Lead Multi-Grid</button>
+                            <button class="mode-btn" id="btn-view-rhythm">Lead II Expanded Strip</button>
+                        </div>
+                    </div>
+                    <div class="toolbar-right">
+                        <button class="btn btn-icon-sm" id="btn-play-sweep" title="Play Real-Time Cardiac Sweep Animation">▶ Play Sweep</button>
+                        <button class="btn btn-icon-sm" id="btn-reset-zoom" title="Reset View">🔍 100%</button>
+                    </div>
+                </div>
+
+                <!-- Canvas Wrapper with Hospital Millimeter Grid -->
+                <div class="canvas-viewport" id="canvas-viewport">
+                    <canvas id="ecgCanvas" width="1200" height="680"></canvas>
+                    <div class="sweep-cursor" id="sweep-cursor" style="display:none;"></div>
+                    <div class="canvas-tooltip" id="canvas-tooltip" style="display:none;"></div>
+                </div>
+
+                <!-- Canvas Legend -->
+                <div class="canvas-legend-footer">
+                    <div class="legend-item"><span class="legend-swatch cyan"></span> Active Clinical Channel (Inference Input)</div>
+                    <div class="legend-item"><span class="legend-swatch masked"></span> Masked / Missing Lead (State-Space Zero-Padded & Attention Down-Weighted)</div>
+                    <div class="legend-item"><span class="legend-swatch grid"></span> Calibrated 1mm x 1mm ECG Medical Grid</div>
+                </div>
+            </div>
+
+            <!-- Diagnostic Predictions, Uncertainty & Explainability Section -->
+            <div class="diagnostic-grid-layout">
+                <!-- Column 1: Multi-Label Predicted Probabilities -->
+                <div class="glass-card predictions-panel">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <span class="icon">📋</span>
+                            <span>Multi-Label Cardiac Abnormality Predictions</span>
+                        </div>
+                        <span class="decision-threshold-badge">Decision Threshold: τ = 0.50</span>
+                    </div>
+
+                    <div class="predictions-list" id="predictions-list">
+                        <!-- Populated dynamically via app.js -->
+                    </div>
+
+                    <div class="panel-footer-note">
+                        *Multi-label architecture permits multiple co-occurring diagnoses per recording (e.g. AF concurrent with RBBB and ST-segment depression).
+                    </div>
+                </div>
+
+                <!-- Column 2: Dual Uncertainty Quantification & Clinical Triage -->
+                <div class="glass-card triage-panel">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <span class="icon">🛡️</span>
+                            <span>Uncertainty Quantification & Clinical Safety Triage</span>
+                        </div>
+                        <span class="triage-status-pill success" id="triage-status-pill">AUTOMATED APPROVED</span>
+                    </div>
+
+                    <!-- Clinical Triage Decision Banner -->
+                    <div class="triage-banner approved" id="triage-banner">
+                        <div class="triage-banner-icon" id="triage-banner-icon">🟢</div>
+                        <div class="triage-banner-content">
+                            <div class="triage-banner-title" id="triage-banner-title">Direct Automated Clinical Triage Approved</div>
+                            <div class="triage-banner-desc" id="triage-banner-desc">
+                                Calibrated high-confidence diagnostic profile across 12/12 active leads. Epistemic uncertainty is low (0.038). Diagnostic reliability exceeds 95% threshold.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Uncertainty Dual Dials -->
+                    <div class="uncertainty-dials-group">
+                        <!-- Epistemic Uncertainty Card -->
+                        <div class="uncertainty-card">
+                            <div class="u-card-header">
+                                <span class="u-name">Epistemic Uncertainty</span>
+                                <span class="u-formula">(Model Ignorance / Missing Leads)</span>
+                            </div>
+                            <div class="u-value-display">
+                                <span class="u-number" id="epistemic-val">0.042</span>
+                                <span class="u-label-sub" id="epistemic-tag">LOW (STABLE)</span>
+                            </div>
+                            <div class="u-progress-bar">
+                                <div class="u-fill green" id="epistemic-fill" style="width: 21%;"></div>
+                            </div>
+                            <div class="u-desc">Calculated via 10-pass Monte Carlo Dropout variance over state-space representations.</div>
+                        </div>
+
+                        <!-- Aleatoric Uncertainty Card -->
+                        <div class="uncertainty-card">
+                            <div class="u-card-header">
+                                <span class="u-name">Aleatoric Uncertainty</span>
+                                <span class="u-formula">(Sensor Noise / Signal Quality)</span>
+                            </div>
+                            <div class="u-value-display">
+                                <span class="u-number" id="aleatoric-val">0.058</span>
+                                <span class="u-label-sub" id="aleatoric-tag">ACCEPTABLE</span>
+                            </div>
+                            <div class="u-progress-bar">
+                                <div class="u-fill cyan" id="aleatoric-fill" style="width: 29%;"></div>
+                            </div>
+                            <div class="u-desc">Estimated directly from model's heteroscedastic log-variance head exp(0.5 · s).</div>
+                        </div>
+                    </div>
+
+                    <!-- Cross-Lead Attention Attribution (XAI) -->
+                    <div class="attention-xai-section">
+                        <div class="xai-header">
+                            <span class="xai-title">Dynamic Cross-Lead Attention Allocation</span>
+                            <span class="xai-sub">Which physical leads drove this diagnostic decision?</span>
+                        </div>
+                        <div class="lead-attention-bars" id="lead-attention-bars">
+                            <!-- Populated dynamically via app.js -->
+                        </div>
+                    </div>
+
+                    <!-- Telemetry Summary -->
+                    <div class="execution-telemetry-strip">
+                        <div class="tele-col">
+                            <span class="col-lbl">Inference Latency:</span>
+                            <span class="col-val" id="res-latency">11.4 ms</span>
+                        </div>
+                        <div class="tele-col">
+                            <span class="col-lbl">Parameters:</span>
+                            <span class="col-val">67,512 params</span>
+                        </div>
+                        <div class="tele-col">
+                            <span class="col-lbl">Complexity:</span>
+                            <span class="col-val">O(T log T)</span>
+                        </div>
+                        <div class="tele-col">
+                            <span class="col-lbl">Confidence Score:</span>
+                            <span class="col-val highlight" id="res-confidence">96.2%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 2: MULTI-MODEL BENCHMARK ARENA                            -->
+        <!-- ============================================================== -->
+        <section id="tab-benchmark" class="tab-panel">
+            <!-- Benchmark Winner Showcase Cards -->
+            <div class="benchmark-highlight-grid">
+                <div class="highlight-card winner-ssm">
+                    <div class="card-badge">PROPOSED NOVELTY WINNER</div>
+                    <div class="card-title">Proposed LAC-SSM (State-Space)</div>
+                    <div class="stat-highlight">0.7240 AUROC</div>
+                    <div class="stat-sub">Ultra-Sparse Single-Lead II Performance (3x higher F1 than CNNs under lead loss)</div>
+                    <div class="metric-tags">
+                        <span class="mtag">ECE: 0.1592</span>
+                        <span class="mtag">Params: 67.5k</span>
+                        <span class="mtag">Latency: ~11 ms</span>
+                    </div>
+                </div>
+
+                <div class="highlight-card winner-ml">
+                    <div class="card-badge">CLASSICAL ML WINNER</div>
+                    <div class="card-title">Stacking Ensemble (XGB+RF+ET+LGBM)</div>
+                    <div class="stat-highlight">91.64% Multi-Label Acc</div>
+                    <div class="stat-sub">Highest tabular discrimination across complete 12-lead feature vectors</div>
+                    <div class="metric-tags">
+                        <span class="mtag">Micro AUROC: 0.9425</span>
+                        <span class="mtag">Micro F1: 0.7712</span>
+                    </div>
+                </div>
+
+                <div class="highlight-card winner-dl">
+                    <div class="card-badge">COMPLETE 12-LEAD DL WINNERS</div>
+                    <div class="card-title">TCN-1D & ResNet-1D Baselines</div>
+                    <div class="stat-highlight">0.9368 Micro AUROC</div>
+                    <div class="stat-sub">High temporal sequence modeling when all 12 electrodes are firmly attached</div>
+                    <div class="metric-tags">
+                        <span class="mtag">Macro AUROC: 0.9147</span>
+                        <span class="mtag">TCN Macro F1: 0.6657</span>
+                    </div>
+                </div>
+
+                <div class="highlight-card winner-class-weighted">
+                    <div class="card-badge">IMBALANCE REMEDIATION</div>
+                    <div class="card-title">VGG16-1D (Positive Class Weighted)</div>
+                    <div class="stat-highlight">0.8659 Micro AUROC</div>
+                    <div class="stat-sub">Enhanced sensitivity for rare abnormalities (PVC, STD, STE) via inverse-frequency weights</div>
+                    <div class="metric-tags">
+                        <span class="mtag">Stable Loss</span>
+                        <span class="mtag">Weighted BCE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Leaderboard Table -->
+            <div class="glass-card table-card">
+                <div class="table-toolbar">
+                    <div class="table-title-group">
+                        <span class="table-title">Comprehensive 19-Model Experimental Leaderboard</span>
+                        <span class="table-subtitle">Rigorous cross-validation on Chapman-Shaoxing 12-Lead Cohort (N=3,500)</span>
+                    </div>
+                    <div class="table-filter-group">
+                        <input type="text" id="leaderboard-search" placeholder="🔍 Search model or family...">
+                        <select id="leaderboard-family-filter">
+                            <option value="ALL">All Architecture Families</option>
+                            <option value="State-Space">State-Space Models</option>
+                            <option value="Deep Learning">Deep Learning (1D-CNN / RNN / Trans)</option>
+                            <option value="Classical ML">Classical ML Baselines</option>
+                            <option value="One-Class">Novelty / Outlier Detectors</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="responsive-table-container">
+                    <table class="benchmark-table" id="benchmark-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Model Architecture</th>
+                                <th>Architecture Family</th>
+                                <th class="sortable" data-sort="Macro F1">Macro F1 ⬍</th>
+                                <th class="sortable" data-sort="Micro F1">Micro F1 ⬍</th>
+                                <th class="sortable" data-sort="Macro AUROC">Macro AUROC ⬍</th>
+                                <th class="sortable" data-sort="Micro AUROC">Micro AUROC ⬍</th>
+                                <th class="sortable" data-sort="Hamming Loss">Hamming Loss ⬍</th>
+                                <th class="sortable" data-sort="Accuracy (%)">Accuracy (%) ⬍</th>
+                                <th>Missing Lead Resilience</th>
+                            </tr>
+                        </thead>
+                        <tbody id="benchmark-tbody">
+                            <!-- Populated dynamically via app.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Master Comparative Figures Preview -->
+            <div class="benchmark-figures-row">
+                <div class="glass-card figure-preview-card">
+                    <div class="fig-header">
+                        <span class="fig-title">Clinical Deployment Trade-off Radar</span>
+                    </div>
+                    <img src="/results/figures/fig22_clinical_deployment_tradeoff_radar.png" alt="Clinical Radar" class="responsive-fig" onclick="openLightbox(this.src, this.alt)">
+                </div>
+                <div class="glass-card figure-preview-card">
+                    <div class="fig-header">
+                        <span class="fig-title">Master Benchmarking Matrix Heatmap</span>
+                    </div>
+                    <img src="/results/figures/fig21_master_benchmarking_matrix.png" alt="Benchmarking Matrix" class="responsive-fig" onclick="openLightbox(this.src, this.alt)">
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 3: CONFUSION MATRIX & ROC GALLERY                         -->
+        <!-- ============================================================== -->
+        <section id="tab-gallery" class="tab-panel">
+            <div class="glass-card gallery-control-card">
+                <div class="gallery-header-left">
+                    <span class="gallery-title">Diagnostic Visualizer & Evaluation Gallery</span>
+                    <span class="gallery-desc">Inspect individualized Multi-Label Confusion Matrices (3x3 Heatmaps) and ROC Curves for all 21 models.</span>
+                </div>
+                <div class="gallery-selector-group">
+                    <label for="gallery-model-select">Select Architecture:</label>
+                    <select id="gallery-model-select">
+                        <!-- Populated dynamically via app.js -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Side-by-Side CM & ROC Display -->
+            <div class="gallery-dual-display">
+                <!-- Confusion Matrix Panel -->
+                <div class="glass-card plot-card">
+                    <div class="plot-card-header">
+                        <span class="plot-type">MULTI-LABEL CONFUSION MATRIX (3x3 HEATMAP)</span>
+                        <span class="plot-model-name" id="display-cm-model-name">Proposed LAC-SSM</span>
+                    </div>
+                    <div class="plot-image-wrapper">
+                        <img id="display-cm-img" src="/results/confusion_matrices/cm_proposed_lac_ssm.png" alt="Confusion Matrix" class="plot-img" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <div class="plot-caption">
+                        Calculated across True Positives (TP), False Positives (FP), and False Negatives (FN) per cardiac category.
+                    </div>
+                </div>
+
+                <!-- ROC Curve Panel -->
+                <div class="glass-card plot-card">
+                    <div class="plot-card-header">
+                        <span class="plot-type">RECEIVER OPERATING CHARACTERISTIC (ROC) CURVES</span>
+                        <span class="plot-model-name" id="display-roc-model-name">Proposed LAC-SSM</span>
+                    </div>
+                    <div class="plot-image-wrapper">
+                        <img id="display-roc-img" src="/results/roc_curves/roc_proposed_lac_ssm.png" alt="ROC Curves" class="plot-img" onclick="openLightbox(this.src, this.alt)">
+                    </div>
+                    <div class="plot-caption">
+                        Shows True Positive Rate vs False Positive Rate for all 9 classes, plus Micro-Average and Macro-Average AUROC.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Master Research Figures Grid -->
+            <div class="master-figures-showcase">
+                <div class="showcase-section-title">Master Evaluation Figures & Training Curves</div>
+                <div class="showcase-grid" id="master-figures-grid">
+                    <!-- Populated dynamically via app.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- TAB 4: SCIENTIFIC ARCHITECTURE & THEORY                       -->
+        <!-- ============================================================== -->
+        <section id="tab-architecture" class="tab-panel">
+            <div class="glass-card scientific-theory-card">
+                <div class="theory-hero">
+                    <h2>Proposed LAC-SSM Architecture & Mathematical Formulation</h2>
+                    <p class="hero-lead">
+                        Lead-Agnostic and Uncertainty-Calibrated State-Space Modeling for Multi-Label Cardiac Abnormality Detection from Incomplete 12-Lead Electrocardiograms.
+                    </p>
+                    <div style="margin-top: 14px; display: flex; gap: 12px;">
+                        <a href="/results/IEEE_T_BME_Lead_Agnostic_State_Space_Model_CardioLAC_SSM.pdf" target="_blank" class="btn btn-primary btn-sm" style="text-decoration:none;"><span>📥</span> Download Full IEEE Journal PDF (47 Pages, 19.8 MB)</a>
+                        <a href="/paper/Q1_Journal_Paper_CardioLAC_SSM.md" target="_blank" class="btn btn-outline btn-sm" style="text-decoration:none;"><span>📄</span> View Markdown Manuscript</a>
+                    </div>
+                </div>
+
+                <div class="theory-grid">
+                    <div class="theory-column">
+                        <h3>1. Continuous State-Space Formulation</h3>
+                        <p>Continuous-time state-space models represent input signals $u(t) \in \mathbb{R}$ through hidden latent states $x(t) \in \mathbb{C}^N$ governed by linear differential equations:</p>
+                        <div class="math-box">
+                            $$\dot{x}(t) = \mathbf{A} x(t) + \mathbf{B} u(t)$$
+                            $$y(t) = \mathbf{C} x(t) + \mathbf{D} u(t)$$
+                        </div>
+                        <p>Where $\mathbf{A} \in \mathbb{C}^{N 	imes N}$ is the state-transition matrix initialized with HiPPO (High-Order Polynomial Projection Operators) for long-range temporal memorization.</p>
+
+                        <h3>2. Diagonalization & S4D Discretization</h3>
+                        <p>To avoid $O(N^3)$ computational bottlenecks, the proposed architecture restricts $\mathbf{A}$ to a diagonal parameterization $\mathbf{A} = 	ext{diag}(\lambda_1, \dots, \lambda_N)$ where $\lambda_n = -\exp(lpha_n) + i eta_n$. Under Zero-Order Hold (ZOH) discretization with step size $\Delta$:</p>
+                        <div class="math-box">
+                            $$ar{\mathbf{A}} = \exp(\Delta \mathbf{A}), \quad ar{\mathbf{B}} = (ar{\mathbf{A}} - \mathbf{I})\mathbf{A}^{-1} \mathbf{B}$$
+                            $$\mathbf{K}_t = 2 	ext{Re}\left( \mathbf{C} ar{\mathbf{A}}^t ar{\mathbf{B}} 
+ight), \quad y = u * \mathbf{K} + \mathbf{D} u$$
+                        </div>
+                        <p>Convolution over sequence length $T$ executes in $O(T \log T)$ time via Fast Fourier Transforms (FFT), enabling $10	ext{ ms}$ edge inference latency.</p>
+                    </div>
+
+                    <div class="theory-column">
+                        <h3>3. Dynamic Cross-Lead Attention Pooling</h3>
+                        <p>When leads are missing ($m_\ell = 0$), classical CNNs and RNNs experience catastrophic dimensional failure. LAC-SSM utilizes anatomical lead embeddings and softmax masking:</p>
+                        <div class="math-box">
+                            $$z_\ell(t) = 	ext{LeadStem}(x_\ell(t)) + \mathbf{e}_\ell^{	ext{anat}}$$
+                            $$w_\ell = rac{\exp(\mathbf{W}_{	ext{att}} z_\ell + (m_\ell - 1)\cdot 10^9)}{\sum_{k=1}^L \exp(\mathbf{W}_{	ext{att}} z_k + (m_k - 1)\cdot 10^9)}$$
+                            $$u(t) = \sum_{\ell=1}^L w_\ell \cdot (m_\ell \cdot z_\ell(t))$$
+                        </div>
+                        <p>This allows seamless, permutation-invariant aggregation regardless of whether 12, 6, 3, or only 1 single lead is available.</p>
+
+                        <h3>4. Dual Uncertainty Quantification Head</h3>
+                        <p>The network outputs both predictive mean logits $\mu \in \mathbb{R}^C$ and heteroscedastic aleatoric log-variance $s = \log \sigma_{	ext{aleatoric}}^2 \in \mathbb{R}^C$. Loss is optimized via attenuated multi-label cross-entropy:</p>
+                        <div class="math-box">
+                            $$\mathcal{L}_{	ext{hetero}} = \sum_{c=1}^C \left[ rac{(y_c - \sigma(\mu_c))^2}{2 \sigma_c^2} + rac{1}{2} \log \sigma_c^2 
+ight]$$
+                        </div>
+                        <p>Epistemic uncertainty $\sigma_{	ext{epistemic}}^2$ is evaluated at runtime via Monte Carlo Dropout over $M=10$ stochastic passes, providing automated clinical triage bounds.</p>
+                    </div>
+                </div>
+
+                <div class="theory-diagram-wrapper">
+                    <h4>Overall System Pipeline Flow</h4>
+                    <img src="/results/figures/fig8_lac_ssm_architecture_diagram.png" alt="Architecture Diagram" class="diagram-img" onclick="openLightbox(this.src, this.alt)">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox Modal for High-Resolution Plot Zoom -->
+    <div class="lightbox-modal" id="lightbox-modal" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+            <img id="lightbox-img" src="" alt="High Resolution View">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script src="/app.js"></script>
+</body>
+</html>

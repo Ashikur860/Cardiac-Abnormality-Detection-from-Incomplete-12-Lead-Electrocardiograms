@@ -1,0 +1,38 @@
+# Large datasets and raw recording signals
+archive/
+data/raw/
+data/processed/
+*.mat
+*.hea
+results/metrics/preprocessed_data.npz
+
+# Python cache & build
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Jupyter & IDE
+.ipynb_checkpoints/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# LaTeX build intermediates
+paper/latex/*.aux
+paper/latex/*.log
+paper/latex/*.out
+paper/latex/*.xdv
+paper/latex/*.bbl
+paper/latex/*.blg
+paper/latex/test*
+
+# Temporary logs & scratch
+*.log
+scratch/

@@ -1,0 +1,11 @@
+Component,Specification
+Total Parameters,"67,512"
+Trainable Parameters,"67,512"
+Model Memory Footprint,0.26 MB
+Lead Embeddings,12 x 64 (Learnable)
+Shared Lead Stem Conv,2-stage 1D Conv (Stride 4 downsampling)
+Selective SSM Layers,2 Bidirectional S4D Blocks
+State Expansion Dim (d_state),16
+Model Feature Dim (d_model),64
+Inference Latency per ECG,36.51 ms
+Inference Throughput,27.4 ECGs/sec

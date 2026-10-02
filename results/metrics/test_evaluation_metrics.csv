@@ -1,0 +1,3 @@
+Evaluation Setting,Macro F1,Micro F1,Weighted F1,Macro AUROC,Micro AUROC,Macro AUPRC,Micro AUPRC,Hamming Loss,Subset Acc,Jaccard Index
+LAC-SSM (Default Thresh = 0.50),0.4393,0.6053,0.6254,0.7673,0.8712,0.456,0.6999,0.1996,0.1943,0.3173
+LAC-SSM (Validation-Locked Optimized Thresh),0.4557,0.6149,0.632,0.7673,0.8712,0.456,0.6999,0.1858,0.2114,0.3317

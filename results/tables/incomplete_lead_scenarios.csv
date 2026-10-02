@@ -1,0 +1,32 @@
+Scenario Identifier,Category,Mean Leads Available,Missing Leads,Description
+full_12,Reference Complete ECG,12.0,0,Standard full 12 leads
+Full_12_Lead,Clinical Standard Group,12.0,0,"Fixed leads: I, II, III, aVR, aVL, aVF, V1, V2, V3, V4, V5, V6"
+Limb_Only_6_Lead,Clinical Standard Group,6.0,6,"Fixed leads: I, II, III, aVR, aVL, aVF"
+Precordial_Only_6_Lead,Clinical Standard Group,6.0,6,"Fixed leads: V1, V2, V3, V4, V5, V6"
+Einthoven_3_Lead,Clinical Standard Group,3.0,9,"Fixed leads: I, II, III"
+Lead_II_Rhythm_Strip,Clinical Standard Group,1.0,11,Fixed leads: II
+Wearable_Lead_I,Clinical Standard Group,1.0,11,Fixed leads: I
+Contiguous_Anterior_V1_V3,Clinical Standard Group,3.0,9,"Fixed leads: V1, V2, V3"
+Contiguous_Lateral_I_aVL_V5_V6,Clinical Standard Group,4.0,8,"Fixed leads: I, aVL, V5, V6"
+Contiguous_Inferior_II_III_aVF,Clinical Standard Group,3.0,9,"Fixed leads: II, III, aVF"
+random_11_leads,Systematic Random Reduction,11.0,1,Random 11 leads available per sample
+random_10_leads,Systematic Random Reduction,10.0,2,Random 10 leads available per sample
+random_9_leads,Systematic Random Reduction,9.0,3,Random 9 leads available per sample
+random_8_leads,Systematic Random Reduction,8.0,4,Random 8 leads available per sample
+random_6_leads,Systematic Random Reduction,6.0,6,Random 6 leads available per sample
+random_4_leads,Systematic Random Reduction,4.0,8,Random 4 leads available per sample
+random_3_leads,Systematic Random Reduction,3.0,9,Random 3 leads available per sample
+random_2_leads,Systematic Random Reduction,2.0,10,Random 2 leads available per sample
+random_1_leads,Systematic Random Reduction,1.0,11,Random 1 leads available per sample
+drop_lead_I,Leave-One-Out Sensitivity,11.0,1,All leads present except I
+drop_lead_II,Leave-One-Out Sensitivity,11.0,1,All leads present except II
+drop_lead_III,Leave-One-Out Sensitivity,11.0,1,All leads present except III
+drop_lead_aVR,Leave-One-Out Sensitivity,11.0,1,All leads present except aVR
+drop_lead_aVL,Leave-One-Out Sensitivity,11.0,1,All leads present except aVL
+drop_lead_aVF,Leave-One-Out Sensitivity,11.0,1,All leads present except aVF
+drop_lead_V1,Leave-One-Out Sensitivity,11.0,1,All leads present except V1
+drop_lead_V2,Leave-One-Out Sensitivity,11.0,1,All leads present except V2
+drop_lead_V3,Leave-One-Out Sensitivity,11.0,1,All leads present except V3
+drop_lead_V4,Leave-One-Out Sensitivity,11.0,1,All leads present except V4
+drop_lead_V5,Leave-One-Out Sensitivity,11.0,1,All leads present except V5
+drop_lead_V6,Leave-One-Out Sensitivity,11.0,1,All leads present except V6

@@ -1,0 +1,17 @@
+Parameter,Setting
+Raw Sampling Rate (fs),500 Hz
+Processed Sampling Rate (target_fs),100 Hz
+Bandpass Filter Type,Butterworth Bandpass
+Low Cutoff Frequency (Hz),0.5 Hz
+High Cutoff Frequency (Hz),45.0 Hz
+Filter Order,3 (Effective 6th order via zero-phase)
+Filter Phase Response,Zero-phase (filtfilt forward-backward)
+Input Temporal Samples,"5,000 samples"
+Output Temporal Samples,"1,000 samples"
+ECG Duration (s),10.0 seconds
+Number of Leads,"12 leads (I, II, III, aVR, aVL, aVF, V1-V6)"
+Voltage Unit Scaling,mV = ADC / 200.0
+Normalization Method,Lead-wise Z-score: (X - mu) / (sigma + 1e-6)
+Train Patients (Zero-Leakage),"2,450"
+Val Patients (Zero-Leakage),525
+Test Patients (Zero-Leakage),525

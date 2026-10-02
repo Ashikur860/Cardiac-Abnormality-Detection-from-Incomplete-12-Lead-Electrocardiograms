@@ -1,0 +1,15 @@
+Metric,Value
+Total ECG Records,"21,837"
+Total Unique Patients,"21,837"
+Leads per Record,"12 (I, II, III, aVR, aVL, aVF, V1-V6)"
+Sampling Frequency (Hz),500
+Duration per Record (s),10.0
+Total Samples per Lead,"5,000"
+Corrupted Records Detected,0 (0.00%)
+Missing Values in Signals,0 (0.00%)
+Target Abnormalities Defined,9
+Mean Label Cardinality,1.34
+Label Density,0.149
+Patients with Multi-Label Dx (>=2),"6,335 (29.0%)"
+Patients with Single Label Dx,"14,468 (66.3%)"
+Patients with Normal SR Only,"13,148 (60.2%)"

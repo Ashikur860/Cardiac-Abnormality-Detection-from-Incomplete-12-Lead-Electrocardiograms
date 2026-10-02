@@ -1,0 +1,3 @@
+Calibration Status,ECE,MCE,Brier Score
+Uncalibrated (T = 1.000),0.1798,0.2898,0.1431
+Temperature Calibrated (T* = 0.691),0.1592,0.3139,0.1374

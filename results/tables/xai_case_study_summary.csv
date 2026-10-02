@@ -1,0 +1,6 @@
+Case,Outcome,Key Lead,Morphological Alignment
+Case 1: AF,True Positive,Lead II / V1,Chaotic baseline between QRS complexes
+Case 2: LBBB,True Positive,Lead V1 / V6,Prolonged QRS complex with deep S-wave
+Case 3: STD,False Positive,Lead II,Baseline drift artifact mimicking ST depression
+Case 4: PAC,False Negative,Lead II,Subtle premature P-wave eclipsed by baseline noise
+Case 5: LBBB (Incomplete),High Uncertainty Prediction,Lead I / II,Compensatory peripheral focus with elevated epistemic variance

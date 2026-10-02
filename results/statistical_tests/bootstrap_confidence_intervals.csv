@@ -1,0 +1,5 @@
+Model,Metric,Mean,95% CI
+Proposed LAC-SSM,Macro AUROC,0.7668,"[0.7464, 0.7881]"
+Proposed LAC-SSM,Macro F1,0.4539,"[0.4255, 0.4813]"
+ResNet-1D Baseline,Macro AUROC,0.9003,"[0.8846, 0.9143]"
+ResNet-1D Baseline,Macro F1,0.6057,"[0.5777, 0.6314]"

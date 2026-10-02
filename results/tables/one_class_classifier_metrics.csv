@@ -1,0 +1,2 @@
+Model,Target Task,AUROC,Accuracy (%),Precision (%),Recall (%),F1-Score
+One-Class SVM (Anomaly/Arrhythmia Detection),Normal Sinus vs. Cardiac Pathologies,0.6661,46.1,81.82,33.07,0.471
