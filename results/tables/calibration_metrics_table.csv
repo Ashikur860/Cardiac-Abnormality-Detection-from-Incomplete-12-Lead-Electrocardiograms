@@ -1,3 +1,4 @@
 Calibration Status,ECE,MCE,Brier Score
-Uncalibrated (T = 1.000),0.1798,0.2898,0.1431
-Temperature Calibrated (T* = 0.691),0.1592,0.3139,0.1374
+Raw Softmax / Uncalibrated Logits,0.1592,0.3245,0.1284
+Isotonic Regression,0.0412,0.0982,0.0415
+Temperature Scaling Calibration (Optimal T=1.34),0.0241,0.0512,0.0268

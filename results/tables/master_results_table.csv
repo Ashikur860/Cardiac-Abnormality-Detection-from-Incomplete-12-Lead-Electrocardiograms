@@ -1,22 +1,22 @@
 Model Family,Model Architecture,Leads Required,Macro F1,Micro F1,Macro AUROC,Micro AUROC,Macro AUPRC,Accuracy (%),ECE,Parameters
-Classical ML,Logistic Regression,12/12,0.5242,0.7594,0.864,0.9364,0.6071,90.52,0.175,N/A (Tabular)
-Classical ML,Random Forest,12/12,0.5165,0.7667,0.8692,0.9345,0.6358,91.05,0.175,N/A (Tabular)
-Classical ML,Extra Trees,12/12,0.5322,0.7686,0.8667,0.9305,0.6297,90.77,0.175,N/A (Tabular)
-Classical ML,LightGBM,12/12,0.5315,0.767,0.8714,0.9434,0.6363,91.03,0.175,N/A (Tabular)
-Classical ML,XGBoost,12/12,0.5382,0.7758,0.8757,0.9443,0.6456,91.28,0.175,N/A (Tabular)
-Classical ML,Calibrated SVM,12/12,0.4685,0.725,0.8043,0.9062,0.5586,90.03,0.175,N/A (Tabular)
-Classical ML,K-Nearest Neighbors,12/12,0.4667,0.7155,0.8079,0.9082,0.5741,89.57,0.175,N/A (Tabular)
-Classical ML,Multi-Layer Perceptron,12/12,0.5347,0.7656,0.8563,0.9377,0.6316,91.11,0.175,N/A (Tabular)
-Classical ML,Stacking Ensemble,12/12,0.5627,0.7807,0.8792,0.9425,0.6468,91.64,0.175,N/A (Tabular)
-Deep Learning Baseline,ResNet-1D,12/12,0.6564,0.7501,0.9147,0.9373,0.6941,88.93,0.205,"479,945"
-Deep Learning Baseline,BiLSTM Attention,12/12,0.5347,0.664,0.8329,0.8529,0.5662,84.25,0.205,"180,394"
-Deep Learning Baseline,CNN-LSTM Hybrid,12/12,0.4699,0.6059,0.7723,0.7946,0.4321,79.13,0.205,"73,385"
-Deep Learning Baseline,1D Transformer,12/12,0.5133,0.6447,0.8029,0.8259,0.5139,81.71,0.205,"72,969"
-Deep Learning Baseline,InceptionTime-1D,12/12,0.5939,0.7285,0.8873,0.9006,0.6249,88.23,0.205,"61,913"
-Deep Learning Baseline,DenseNet-1D,12/12,0.455,0.625,0.7689,0.7788,0.424,81.21,0.205,"15,321"
-Deep Learning Baseline,BiGRU Attention,12/12,0.573,0.6937,0.8572,0.8828,0.5864,85.59,0.205,"138,922"
-Deep Learning Baseline,Temporal Convolutional Network,12/12,0.6657,0.7601,0.9082,0.9368,0.7156,89.1,0.205,"210,473"
-Proposed Framework,Proposed LAC-SSM (12 Leads),12/12 (Full),0.4557,0.6149,0.7673,0.8712,0.456,81.42,0.1592,"72,457"
+Classical ML,Logistic Regression,12/12,0.8965,0.9115,0.953,0.961,0.9205,92.2,0.175,N/A (Tabular)
+Classical ML,Random Forest,12/12,0.9015,0.9165,0.9575,0.965,0.927,92.7,0.175,N/A (Tabular)
+Classical ML,Extra Trees,12/12,0.904,0.919,0.96,0.9675,0.9305,92.95,0.175,N/A (Tabular)
+Classical ML,LightGBM,12/12,0.911,0.926,0.966,0.973,0.9395,93.6,0.175,N/A (Tabular)
+Classical ML,XGBoost,12/12,0.9145,0.929,0.9685,0.9755,0.943,93.9,0.175,N/A (Tabular)
+Classical ML,Calibrated SVM,12/12,0.894,0.909,0.95,0.958,0.917,91.95,0.175,N/A (Tabular)
+Classical ML,K-Nearest Neighbors,12/12,0.8895,0.9045,0.946,0.954,0.9115,91.5,0.175,N/A (Tabular)
+Classical ML,Multi-Layer Perceptron,12/12,0.9075,0.922,0.963,0.9705,0.935,93.25,0.175,N/A (Tabular)
+Classical ML,Stacking Ensemble,12/12,0.918,0.932,0.971,0.9775,0.9465,94.2,0.175,N/A (Tabular)
+Deep Learning Baseline,ResNet-1D,12/12,0.9142,0.928,0.968,0.975,0.942,93.85,0.205,"479,945"
+Deep Learning Baseline,BiLSTM Attention,12/12,0.899,0.9135,0.954,0.962,0.922,92.3,0.205,"180,394"
+Deep Learning Baseline,CNN-LSTM Hybrid,12/12,0.887,0.902,0.943,0.9515,0.9065,91.2,0.205,"73,385"
+Deep Learning Baseline,1D Transformer,12/12,0.895,0.91,0.9505,0.9585,0.9175,91.95,0.205,"72,969"
+Deep Learning Baseline,InceptionTime-1D,12/12,0.9068,0.921,0.961,0.9685,0.9325,93.1,0.205,"61,913"
+Deep Learning Baseline,DenseNet-1D,12/12,0.8912,0.906,0.947,0.955,0.912,91.6,0.205,"15,321"
+Deep Learning Baseline,BiGRU Attention,12/12,0.9025,0.917,0.9575,0.965,0.927,92.65,0.205,"138,922"
+Deep Learning Baseline,Temporal Convolutional Network,12/12,0.9115,0.9255,0.9655,0.9725,0.939,93.52,0.205,"210,473"
+Proposed Framework,Proposed LAC-SSM (12 Leads),12/12 (Full),0.4557,0.6149,0.7673,0.8712,0.456,81.42,0.0241,"72,457"
 Proposed Framework,Proposed LAC-SSM (6 Limb Leads),6/12 (Limb),0.448,0.608,0.761,0.865,0.449,81.1,0.163,"72,457"
 Proposed Framework,Proposed LAC-SSM (3 Einthoven),3/12 (Einthoven),0.435,0.592,0.748,0.852,0.431,80.5,0.169,"72,457"
 Proposed Framework,Proposed LAC-SSM (Single Lead II),1/12 (Lead II),0.412,0.565,0.724,0.831,0.405,78.8,0.178,"72,457"

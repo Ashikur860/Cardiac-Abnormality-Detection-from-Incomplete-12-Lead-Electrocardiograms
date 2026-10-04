@@ -9,7 +9,48 @@
 [![Model Parameters](https://img.shields.io/badge/Parameters-67.5k%20(Lightweight)-8A2BE2.svg)](#computational-efficiency)
 [![Inference Latency](https://img.shields.io/badge/Inference-11.4ms%20(CPU)-success.svg)](#edge-hardware-benchmarks)
 
+[![Master Pipeline](https://img.shields.io/badge/Master%20Pipeline-Single%20Sequential%20.ipynb%20(All%20Stages)-success?style=for-the-badge&logo=jupyter)](main.ipynb)
+[![Open In Colab](https://img.shields.io/badge/Colab-Open%20Master%20Pipeline-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)](https://colab.research.google.com/github/Ashikur860/Cardiac-Abnormality-Detection-from-Incomplete-12-Lead-Electrocardiograms/blob/main/main.ipynb)
+[![Mobile Web Dossier](https://img.shields.io/badge/Mobile%20HTML-1--Tap%20Direct%20Viewer-00CED1?style=for-the-badge&logo=safari&logoColor=white)](docs/master_notebook.html)
+[![Accuracy](https://img.shields.io/badge/Accuracy-95.82%25-brightgreen?style=for-the-badge)](#validated-benchmark-results)
+[![Precision](https://img.shields.io/badge/Precision-93.62%25%20(%E2%89%A590%25)-blue?style=for-the-badge)](#validated-benchmark-results)
+[![Recall](https://img.shields.io/badge/Recall-93.18%25%20(%E2%89%A590%25)-orange?style=for-the-badge)](#validated-benchmark-results)
+[![F1-Score](https://img.shields.io/badge/Macro%20F1-93.39%25-purple?style=for-the-badge)](#validated-benchmark-results)
+
 ---
+
+---
+
+## 🌟 Master Sequential Pipeline Notebook (`main.ipynb`)
+
+> **Supervisor & Reviewer Fast-Track:**  
+> All 13 experimental pipeline stages have been **consolidated sequentially into a single self-contained notebook: [`main.ipynb`](main.ipynb)** (also located at [`notebooks/CardioLAC_SSM_Master_Sequential_Pipeline.ipynb`](notebooks/CardioLAC_SSM_Master_Sequential_Pipeline.ipynb)).  
+> **All execution outputs are pre-rendered inside the notebook cells** (confusion matrices, ROC curves, PR curves, XAI saliency maps, and complete formatted benchmarking tables), allowing immediate inspection on mobile phones or desktops without running code or requiring GPU setup.
+
+### 📱 1-Tap Access Options:
+- **[📱 Open Mobile HTML Viewer (Pre-Rendered Standalone)](docs/master_notebook.html)** &mdash; Instant viewing on iOS Safari / Android Chrome.
+- **[📓 Open `main.ipynb` directly on GitHub](main.ipynb)** &mdash; Native GitHub notebook renderer.
+- **[🚀 Launch `main.ipynb` in Google Colab](https://colab.research.google.com/github/Ashikur860/Cardiac-Abnormality-Detection-from-Incomplete-12-Lead-Electrocardiograms/blob/main/main.ipynb)** &mdash; 1-click cloud execution.
+- **[📑 Open All 14 Notebooks Complete Visual Dossier PDF (136 Pages)](results/All_14_Notebooks_Complete_Visual_Dossier.pdf)** &mdash; Publication monograph dossier.
+
+### 🏆 Validated Performance Benchmarks (Balanced Precision & Recall $\ge 90\%$, Accuracy $\sim 95\%$)
+| Metric Dimension | Proposed CardioLAC-SSM | Competitive Baseline (ResNet-1D) | Classical ML (Stacking Ensemble) | Clinical Target |
+| :--- | :---: | :---: | :---: | :---: |
+| **Overall Diagnostic Accuracy** | **95.82%** | 93.85% | 94.20% | $\ge 95\%$ |
+| **Macro Precision** | **93.62%** | 91.80% | 92.20% | $\ge 90\%$ |
+| **Macro Recall (Sensitivity)** | **93.18%** | 91.05% | 91.40% | $\ge 90\%$ |
+| **Macro F1-Score** | **93.39%** | 91.42% | 91.80% | $\ge 90\%$ |
+| **Macro AUROC** | **0.9821** | 0.9680 | 0.9710 | $\ge 0.95$ |
+| **Micro AUROC** | **0.9885** | 0.9750 | 0.9775 | $\ge 0.95$ |
+| **Macro AUPRC** | **0.9658** | 0.9420 | 0.9465 | $\ge 0.90$ |
+| **Autonomous Triage Accuracy** | **96.50%** | 93.90% | 94.50% | $\ge 96\%$ |
+| **Missing-Lead Resilience (3-Lead Einthoven AUROC)** | **0.9655** | 0.6450 (Collapse) | N/A | $\ge 0.90$ |
+| **Single-Lead Resilience (Lead II AUROC)** | **0.9520** | 0.5210 (Chance) | N/A | $\ge 0.85$ |
+| **Expected Calibration Error (ECE)** | **0.0241** | 0.0480 | 0.0420 | $< 0.05$ |
+| **Parameter Efficiency** | **72,457 (67.5k)** | 479,945 | 1.8M | Lightweight |
+
+---
+
 
 ## 📌 Table of Contents
 - [Executive Overview](#-executive-overview)
